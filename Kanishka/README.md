@@ -1,5 +1,6 @@
 KANISHKA
 
-- 12.4.25
+- 15.04.25
+ - Added the pre Currently scanning.txt
 
 
