@@ -1,0 +1,87 @@
+# Saving the complete updated network audit report including the FTP exploit table into a text file for GitHub upload
+
+report_content = """
+# Network Audit Report - College Infrastructure
+
+## Overview
+This report summarizes the vulnerabilities discovered during the network audit conducted on the college network. Tools such as Nmap, WhatWeb, Enum4Linux, Nikto, and Metasploit Framework were used for enumeration and vulnerability assessment.
+
+---
+
+## Target Information
+
+**Target Type:** Router  
+**MAC Address:** C0:BF:A7:73:09:40 (Juniper Networks)  
+**IP Subnet Scanned:** 10.21.128.1
+
+---
+
+## Open Ports and Services on Router
+
+| Port | State  | Service  | Version                       |
+|------|--------|----------|-------------------------------|
+| 21   | open   | ftp      | WU-FTPD or MIT Kerberos ftpd 6.00LS |
+| 22   | open   | ssh      | OpenSSH 6.9 (protocol 2.0)    |
+| 80   | open   | http     | Embedthis-Appweb 3.2.3        |
+| 443  | open   | ssl/http | Embedthis-Appweb 3.2.3        |
+
+---
+
+## FTP Vulnerability Analysis
+
+- Attempted connection to FTP port.
+- Exploit search conducted using Metasploit Framework.
+- Retrieved exploit table for WU-FTPD and MIT Kerberos ftpd.
+
+### Exploit Table
+
+| Exploit Title | Path |
+|---------------|------|
+| Washington University WU-FTPD 2.5.0 - 'message' Remote Buffer | multiple/remote/19560.c |
+| WU-FTPD - Site EXEC/INDEX Format String (Metasploit) | linux/remote/16311.rb |
+| WU-FTPD 2.4.2 / SCO Open Server 5.0.5 / ProFTPd 1.2 pre1 - ' | linux/remote/19086.c |
+| WU-FTPD 2.4.2 / SCO Open Server 5.0.5 / ProFTPd 1.2 pre1 - ' | linux/remote/19087.c |
+| WU-FTPD 2.4.2/2.5.0/2.6.0 - Remote Format String Stack Over | linux/remote/20031.c |
+| WU-FTPD 2.4.2/2.5.0/2.6.0 - Remote Format String Stack Over | linux_x86/remote/20032.txt |
+| WU-FTPD 2.4.2/2.5.0/2.6.0 - Remote Format String Stack Over | unix/remote/20030.c |
+| WU-FTPD 2.4.2/2.5.0/2.6.0/2.6.1/2.6.2 - FTP Conversion | unix/remote/20563.txt |
+| WU-FTPD 2.4.2/2.5/2.6 - Debug Mode Client Hostname Format String | unix/remote/20594.txt |
+| WU-FTPD 2.4/2.5/2.6 / Trolltech ftpd 1.2 / ProFTPd 1.2 / Ber | linux/remote/20690.sh |
+| WU-FTPD 2.6 - File Globbing Heap Corruption | unix/remote/21161.txt |
+| WU-FTPD 2.6.0 - Remote Command Execution | multiple/remote/201.c |
+| WU-FTPD 2.6.0 - Remote Format Strings | solaris/remote/239.c |
+| WU-FTPD 2.6.0/2.6.1/2.6.2 - 'realpath()' Off-by-One Buffer Overflow | unix/remote/22975.c |
+| WU-FTPD 2.6.1 - Remote Command Execution | linux/remote/348.c |
+| WU-FTPD 2.6.2 - 'realpath()' Off-by-One Buffer Overflow | unix/remote/22974.c |
+| WU-FTPD 2.6.2 - 'wuftpd-freezer.c' Remote Denial of Service | linux/dos/115.c |
+| WU-FTPD 2.6.2 - File Globbing Denial of Service | linux/dos/842.c |
+| WU-FTPD 2.6.2 - Off-by-One Remote Command Execution | linux/remote/74.c |
+| WU-FTPD 2.6.2 - Remote Command Execution | linux/remote/78.c |
+
+---
+
+## HTTP Security Headers (Nikto Result)
+
+- **Web Server:** Embedthis-Appweb 3.2.3
+- **Missing Header:** X-Frame-Options (anti-clickjacking protection not implemented)
+- This exposes the device to clickjacking attacks.
+
+---
+
+## Recommendations
+
+1. Disable or secure FTP service on the router.
+2. Apply strong access controls and patch known vulnerabilities in WU-FTPD.
+3. Enable missing HTTP security headers like:
+   - `X-Frame-Options`
+4. Restrict external access to management interfaces (HTTP, SSH).
+5. Monitor the device for unusual login attempts or access patterns.
+
+---
+
+## Notes
+
+- All actions were conducted within the scope of an internal audit.
+- No unauthorized access or exploitation was performed.
+"""
+
