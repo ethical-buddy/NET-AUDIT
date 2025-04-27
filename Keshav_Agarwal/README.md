@@ -2,7 +2,8 @@
 comit by Keshav created me own branch
 
 28.04.2025
-I scanned the login page for our internet login, which we use to access KIET's internet.
+I scanned the login page for our internet login using NMAP command, which we use to access KIET's internet.
+Command used - "nmap -A 172.16.16.16"
 KIET uses SOPOS as their 3rd party service provider for Firewall and internet security servie. Sophos has setup 172.16.16.16 as defaut login ip for user to access internet in KIET. I tried to scan ports on this IP, to see which services are current running on this IP.
 Here are my findings
 172.16.16.16:8090 -> (User access portal) This port is being used to provide interface for noraml users to enter their credentials and login.
