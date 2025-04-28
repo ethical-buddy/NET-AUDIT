@@ -1,13 +1,31 @@
 11.4.25
 comit by Keshav created me own branch
 
-28.04.2025
-I scanned the login page for our internet login using NMAP command, which we use to access KIET's internet.
-Command used - "nmap -A 172.16.16.16"
-KIET uses SOPOS as their 3rd party service provider for Firewall and internet security servie. Sophos has setup 172.16.16.16 as defaut login ip for user to access internet in KIET. I tried to scan ports on this IP, to see which services are current running on this IP.
-Here are my findings
-172.16.16.16:8090 -> (User access portal) This port is being used to provide interface for noraml users to enter their credentials and login.
-172.16.16.16:4444 -> (Firewall access portal) This is the default port for the current running service to access admin panel, in our case Firewall login page in being popped up.
-172.16.16.16:443 -> (VPN access portal) On this port, Firewall service is being used, when we access this IP with correct port. VPN login page will be pushed.
+cat << 'EOF' > README.md
+# KIET Internet Login Page Scan Report
 
-There are also some services that are running but aren't accessible.
+**Date:** 28.04.2025
+
+## Overview
+I performed a scan on the login page used for accessing KIET's internet services. The scan was done using **Nmap**, targeting the IP address \`172.16.16.16\`.
+
+**Command used:**
+\`\`\`bash
+nmap -A 172.16.16.16
+\`\`\`
+
+KIET uses **Sophos** as their third-party service provider for firewall and internet security. Sophos has set up \`172.16.16.16\` as the default login IP for users to access the internet at KIET.
+
+## Objective
+The aim of the scan was to identify open ports and services currently running on \`172.16.16.16\`.
+
+## Findings
+| Port | Service | Description |
+|:----:|:-------:|:-----------:|
+| 8090 | User Access Portal | Provides the web interface for normal users to enter credentials and log in. |
+| 4444 | Firewall Access Portal | Default port for accessing the Sophos firewall admin panel. Accessing this pops up the firewall login page. |
+| 443  | VPN Access Portal | Used for VPN access. Accessing this port brings up the VPN login page. |
+
+Additionally, there are some services running on the server that are currently **not accessible** via standard methods.
+EOF
+
